@@ -1,0 +1,18 @@
+ТЁМНЫЙ СИГНАЛ — как получить APK
+
+Делаем так же, как с NeonPulse:
+
+1) Создай на GitHub новый репозиторий DarkSignalAndroid.
+2) Add file -> Upload files.
+3) Перетащи содержимое этой папки.
+4) Commit changes.
+5) Проверь, что есть .github/workflows/build-apk.yml.
+   Если .github не загрузилась, Add file -> Create new file,
+   имя: .github/workflows/build-apk.yml
+   и вставь содержимое build-apk.yml из архива.
+6) Actions -> Build Dark Signal APK.
+7) Дождись зелёной галочки.
+8) Открой запуск -> Artifacts -> DarkSignal-debug-apk.
+9) Распакуй ZIP и установи app-debug.apk на Samsung.
+
+Игра специально сделана в landscape-режиме.
