@@ -28,7 +28,6 @@ public class MainActivity extends Activity implements HorrorRenderer.GameEvents 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
-        hideSystemUi();
 
         vibrator = (Vibrator) getSystemService(VIBRATOR_SERVICE);
         setupAudio();
@@ -45,6 +44,10 @@ public class MainActivity extends Activity implements HorrorRenderer.GameEvents 
                 FrameLayout.LayoutParams.MATCH_PARENT,
                 FrameLayout.LayoutParams.MATCH_PARENT));
         setContentView(root);
+
+        // Important on Android 16 / newer Samsung firmware:
+        // apply immersive mode only after the DecorView has been created.
+        hideSystemUi();
     }
 
     private void setupAudio() {
@@ -70,7 +73,8 @@ public class MainActivity extends Activity implements HorrorRenderer.GameEvents 
     private void hideSystemUi() {
         if (Build.VERSION.SDK_INT >= 30) {
             getWindow().setDecorFitsSystemWindows(false);
-            WindowInsetsController controller = getWindow().getInsetsController();
+            View decor = getWindow().getDecorView();
+            WindowInsetsController controller = decor.getWindowInsetsController();
             if (controller != null) {
                 controller.hide(WindowInsets.Type.systemBars());
                 controller.setSystemBarsBehavior(
